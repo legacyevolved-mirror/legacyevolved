@@ -85,14 +85,14 @@ Recipes::Recipes()
 		L"sczg",
 		L"#", //
 
-		L'#', new ItemInstance(Tile::tree2Trunk, 1, TreeTile2::ACACIA_TRUNK),
+		L'#', new ItemInstance(Tile::tree2Trunk, 1, TreeTile::ACACIA_TRUNK),
 		L'S');
 
 	addShapedRecipy(new ItemInstance(Tile::wood, 4, TreeTile::DARK_TRUNK), //
 		L"sczg",
 		L"#", //
 
-		L'#', new ItemInstance(Tile::tree2Trunk, 1, TreeTile2::DARK_TRUNK),
+		L'#', new ItemInstance(Tile::tree2Trunk, 1, TreeTile::DARK_TRUNK),
 		L'S');
 
 	addShapedRecipy(new ItemInstance(Item::stick, 4), //

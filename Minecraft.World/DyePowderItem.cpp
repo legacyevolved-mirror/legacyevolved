@@ -141,7 +141,11 @@ bool DyePowderItem::useOn(shared_ptr<ItemInstance> itemInstance, shared_ptr<Play
 		int tile = level->getTile(x, y, z);
 		int data = level->getData(x, y, z);
 
-		if (tile == Tile::treeTrunk_Id && TreeTile::getWoodType(data) == TreeTile::JUNGLE_TRUNK)
+		// we are not supposed to be hardcoding logic like that, we are supposed to be using getWoodType
+		// but for the love of me i could not figure it out
+		int auxValue = data & TreeTile::MASK_TYPE;
+
+		if (tile == Tile::treeTrunk_Id && auxValue == TreeTile::JUNGLE_TRUNK)
 		{
 			if (face == 0) return false;
 			if (face == 1) return false;

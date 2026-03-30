@@ -55,7 +55,7 @@ bool RoofTreeFeature::checkSpace(Level *worldIn, int x, int y, int z, int height
 void RoofTreeFeature::placeLog(Level *worldIn, int x, int y, int z) {
     int tile = worldIn->getTile(x, y, z);
     if (tile == 0 || tile == Tile::leaves_Id || tile == Tile::leaves2_Id || tile == Tile::tallgrass_Id) {
-        placeBlock(worldIn, x, y, z, Tile::tree2Trunk_Id, TreeTile2::DARK_TRUNK);
+        placeBlock(worldIn, x, y, z, Tile::tree2Trunk_Id, TreeTile::DARK_TRUNK);
     }
 }
 

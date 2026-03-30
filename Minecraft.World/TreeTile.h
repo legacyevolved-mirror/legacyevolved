@@ -10,7 +10,8 @@ class TreeTile : public RotatedPillarTile
 	friend class Tile;
 	friend class ChunkRebuildData;
 public:
-	static const int SPRUCE_TRUNK = 1; // this needs to be changed to spruce...
+	static const int OAK_TRUNK = 0;
+	static const int SPRUCE_TRUNK = 1;
 	static const int BIRCH_TRUNK = 2;
 	static const int JUNGLE_TRUNK = 3;
 	static const int ACACIA_TRUNK = 4;
@@ -22,14 +23,9 @@ public:
 	static const int FACING_X = 1 << 2;
 	static const int FACING_Z = 2 << 2;
 
-	static const int TREE_NAMES_LENGTH = 4;
-
-
+	static const int TREE_NAMES_LENGTH = 6;
 	static const unsigned int TREE_NAMES[TREE_NAMES_LENGTH];
-
 	static const wstring TREE_STRING_NAMES[TREE_NAMES_LENGTH];
-
-	static const wstring TREE_TEXTURES[];
 
 private:
 	Icon *icons_side[TREE_NAMES_LENGTH];
@@ -40,7 +36,6 @@ protected:
 
 public:
 	virtual int getResourceCount(Random *random);
-	virtual int getResource(int data, Random *random, int playerBonusLevel);
 	virtual void onRemove(Level *level, int x, int y, int z, int id, int data);
 	virtual unsigned int getDescriptionId(int iData = -1);
 
@@ -49,7 +44,7 @@ protected:
 	virtual Icon *getTopTexture(int type);
 
 public:
-	static int getWoodType(int data);
+	virtual int getWoodType(int data);
 	void registerIcons(IconRegister *iconRegister);
 
 protected:

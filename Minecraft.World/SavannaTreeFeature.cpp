@@ -36,7 +36,7 @@ void SavannaTreeFeature::generateForkingTree(Level* level, Random* random, int x
 
     for (int h = 0; h < height; h++) {
         if (h >= forkH) { curX += dx1; curZ += dz1; }
-        placeBlock(level, curX, y + h, curZ, Tile::tree2Trunk_Id, TreeTile2::ACACIA_TRUNK);
+        placeBlock(level, curX, y + h, curZ, Tile::tree2Trunk_Id, TreeTile::ACACIA_TRUNK);
         if (h == height - 1) generateLeafCap(level, curX, y + h, curZ);
     }
 
@@ -50,7 +50,7 @@ void SavannaTreeFeature::generateForkingTree(Level* level, Random* random, int x
         for (int h = forkH2; h < height; h++) {
             if (h >= 1) {
                 curX2 += dx2; curZ2 += dz2;
-                placeBlock(level, curX2, y + h, curZ2, Tile::tree2Trunk_Id, TreeTile2::ACACIA_TRUNK);
+                placeBlock(level, curX2, y + h, curZ2, Tile::tree2Trunk_Id, TreeTile::ACACIA_TRUNK);
                 if (h == height - 1) generateLeafCap(level, curX2, y + h, curZ2);
             }
         }
@@ -72,7 +72,7 @@ void SavannaTreeFeature::generateBendingTree(Level* level, Random* random, int x
     
     int straightHeight = 2 + random->nextInt(3); 
     for (int i = 0; i < straightHeight; i++) {
-        placeBlock(level, curX, curY, curZ, Tile::tree2Trunk_Id, TreeTile2::ACACIA_TRUNK);
+        placeBlock(level, curX, curY, curZ, Tile::tree2Trunk_Id, TreeTile::ACACIA_TRUNK);
         curY++;
     }
 
@@ -82,7 +82,7 @@ void SavannaTreeFeature::generateBendingTree(Level* level, Random* random, int x
         curX += dirX;
         curZ += dirZ;
         
-        placeBlock(level, curX, curY, curZ, Tile::tree2Trunk_Id, TreeTile2::ACACIA_TRUNK);
+        placeBlock(level, curX, curY, curZ, Tile::tree2Trunk_Id, TreeTile::ACACIA_TRUNK);
         
        
         if (i < diagonalSteps - 1) {

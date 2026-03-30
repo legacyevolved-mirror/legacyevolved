@@ -7,15 +7,18 @@
 
 #include "TreeTile.h"
 
-const unsigned int TreeTile::TREE_NAMES[ TreeTile::TREE_NAMES_LENGTH] = {	IDS_TILE_LOG_OAK,
-													IDS_TILE_LOG_SPRUCE,
-													IDS_TILE_LOG_BIRCH,
-													IDS_TILE_LOG_JUNGLE,
-												};
+const unsigned int TreeTile::TREE_NAMES[TreeTile::TREE_NAMES_LENGTH] = {
+	IDS_TILE_LOG_OAK,
+	IDS_TILE_LOG_SPRUCE,
+	IDS_TILE_LOG_BIRCH,
+	IDS_TILE_LOG_JUNGLE,
+	IDS_TILE_LOG_ACACIA,
+	IDS_TILE_LOG_DARK_OAK
+};
 
-const wstring  TreeTile::TREE_STRING_NAMES[TreeTile::TREE_NAMES_LENGTH] = { L"oak", L"spruce", L"birch", L"jungle" };
-
-const wstring TreeTile::TREE_TEXTURES[] = { L"tree_side", L"tree_spruce", L"tree_birch", L"tree_jungle"};
+const wstring TreeTile::TREE_STRING_NAMES[TreeTile::TREE_NAMES_LENGTH] = {
+	L"oak", L"spruce", L"birch", L"jungle", L"acacia", L"dark"
+};
 
 TreeTile::TreeTile(int id) : RotatedPillarTile(id, Material::wood)
 {
@@ -24,11 +27,6 @@ TreeTile::TreeTile(int id) : RotatedPillarTile(id, Material::wood)
 int TreeTile::getResourceCount(Random *random)
 {
 	return 1;
-}
-
-int TreeTile::getResource(int data, Random *random, int playerBonusLevel)
-{
-	return Tile::treeTrunk_Id;
 }
 
 void TreeTile::onRemove(Level *level, int x, int y, int z, int id, int data)
@@ -43,7 +41,7 @@ void TreeTile::onRemove(Level *level, int x, int y, int z, int id, int data)
 				for (int zo = -r; zo <= r; zo++)
 				{
 					int t = level->getTile(x + xo, y + yo, z + zo);
-					if (t == Tile::leaves_Id|| t == Tile::leaves2_Id)
+					if (t == Tile::leaves_Id || t == Tile::leaves2_Id)
 					{
 						int currentData = level->getData(x + xo, y + yo, z + zo);
 						if ((currentData & LeafTile::UPDATE_LEAF_BIT) == 0)
@@ -55,22 +53,21 @@ void TreeTile::onRemove(Level *level, int x, int y, int z, int id, int data)
 	}
 }
 
-
 unsigned int TreeTile::getDescriptionId(int iData /*= -1*/)
 {
-	int type = iData & MASK_TYPE;
-	if (type < 0 || type >= TreeTile::TREE_NAMES_LENGTH) type = 0;
+	int type = getWoodType(iData);
+	if (type < 0) type = 0;
 	return TreeTile::TREE_NAMES[type];
 }
 
 Icon *TreeTile::getTypeTexture(int type)
 {
-	return icons_side[type];
+	return icons_side[getWoodType(type)];
 }
 
 Icon *TreeTile::getTopTexture(int type)
 {
-	return icons_top[type];
+	return icons_top[getWoodType(type)];
 }
 
 int TreeTile::getWoodType(int data)
@@ -81,10 +78,10 @@ int TreeTile::getWoodType(int data)
 shared_ptr<ItemInstance> TreeTile::getSilkTouchItemInstance(int data)
 {
 	// fix to avoid getting silktouched sideways logs
-	return std::make_shared<ItemInstance>(id, 1, getWoodType(data));
+	return shared_ptr<ItemInstance>(new ItemInstance(id, 1, getWoodType(data)));
 }
 
-void TreeTile::registerIcons(IconRegister *iconRegister)
+void TreeTile::registerIcons(IconRegister* iconRegister)
 {
 	for (int i = 0; i < TREE_NAMES_LENGTH; i++)
 	{
